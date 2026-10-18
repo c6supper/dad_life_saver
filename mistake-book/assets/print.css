@@ -1,0 +1,190 @@
+/* ==========================================================================
+   mistake-book — 错题练习卷 (practice sheet) print stylesheet
+   Target: A4, printed to PDF via scripts/render.ps1
+   Answer blanks are intentionally empty; answers live in the report output.
+   ========================================================================== */
+
+@page {
+  size: A4;
+  margin: 16mm 14mm 18mm;
+}
+
+:root {
+  --ink: #1a1a1a;
+  --muted: #61666d;
+  --rule: #d3d8e0;
+  --accent: #1a5fd0;
+  --band: #eef3fd;
+  --workspace: #fbfcfe;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "SimSun", "Segoe UI", sans-serif;
+  font-size: 11.5pt;
+  line-height: 1.75;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* --- header ------------------------------------------------------------- */
+
+.sheet-header {
+  border-bottom: 2.5px solid var(--accent);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.sheet-header h1 {
+  font-size: 17pt;
+  margin: 0 0 6px;
+  letter-spacing: 0.5px;
+}
+
+.sheet-header .subtitle {
+  font-size: 10pt;
+  color: var(--muted);
+  margin: 0;
+}
+
+.student-bar {
+  display: flex;
+  gap: 22px;
+  margin: 10px 0 18px;
+  font-size: 10.5pt;
+  color: var(--muted);
+}
+
+.student-bar span {
+  flex: 1;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+}
+
+/* --- section headings --------------------------------------------------- */
+
+h2.section {
+  font-size: 13pt;
+  margin: 20px 0 10px;
+  padding: 5px 10px;
+  background: var(--band);
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+
+h2.section:first-of-type { margin-top: 6px; }
+
+/* --- questions ---------------------------------------------------------- */
+
+.question {
+  page-break-inside: avoid;
+  margin: 0 0 14px;
+  padding: 9px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--workspace);
+}
+
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.q-no {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.q-source {
+  font-size: 9pt;
+  color: var(--muted);
+}
+
+.q-body {
+  margin: 0 0 6px;
+}
+
+/* blank answer slot */
+.answer-line {
+  display: inline-block;
+  min-width: 85px;
+  border-bottom: 1px solid #8a9099;
+  margin: 0 3px;
+  vertical-align: baseline;
+}
+
+/* full-width working space for 解答题 */
+.workspace {
+  margin-top: 8px;
+  border: 1px dashed var(--rule);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.workspace.tall  { height: 130px; }
+.workspace.short { height: 70px; }
+
+.workspace::after {
+  content: "解答区";
+  display: block;
+  padding: 4px 6px;
+  font-size: 8.5pt;
+  color: #a8aeb8;
+}
+
+/* multiple choice */
+.options {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 26px;
+}
+
+.options li { min-width: 120px; }
+
+.blank-box {
+  display: inline-block;
+  width: 52px;
+  height: 20px;
+  border: 1.4px solid #8a9099;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+/* --- math --------------------------------------------------------------- */
+
+.math, .formula {
+  font-family: "Cambria Math", "Times New Roman", serif;
+}
+
+code, .mono {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 10.5pt;
+}
+
+/* --- footer ------------------------------------------------------------- */
+
+.sheet-footer {
+  margin-top: 22px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+  font-size: 9pt;
+  color: var(--muted);
+  text-align: center;
+}
+
+.page-break { page-break-before: always; }
+
+/* avoid orphaned headings */
+h3, h4 { page-break-after: avoid; }
